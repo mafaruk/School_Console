@@ -1,0 +1,6 @@
+projectKey=mak.school.org:School
+serverUrl=http://localhost:9000
+serverVersion=6.7.7.38951
+dashboardUrl=http://localhost:9000/dashboard/index/mak.school.org:School
+ceTaskId=AX0qsmi_9F49D3KGzXN4
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX0qsmi_9F49D3KGzXN4
