@@ -14,7 +14,7 @@ public class StaffServices {
 	
 	public int insertStaff(Staff staff) {
 		int i =  staffImpl.insertStaff(staff);
-		return 0;
+		return i;
 	}
 
 	
