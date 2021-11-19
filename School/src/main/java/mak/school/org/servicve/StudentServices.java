@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mak.school.org.dao.StudentImpl;
+import mak.school.org.dao.SubjectImpl;
 import mak.school.org.entities.Student;
 
 @Component
@@ -15,26 +16,26 @@ public class StudentServices{
 	private StudentImpl studentImpl;
 	
 	public int insertStudent(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = studentImpl.insertStudent(student);
+		return i;
 	}
 
 	
 	public Student getStudent(int sid) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = studentImpl.getStudent(sid); 
+		return student;
 	}
 
 	
 	public List<Student> getAllStudent() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Student> students = studentImpl.getAllStudent();
+		return students;
 	}
 
 	
 	public int updateStudent(Student student, int sID) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = studentImpl.updateStudent(student, sID);
+		return i;
 	}
 
 }

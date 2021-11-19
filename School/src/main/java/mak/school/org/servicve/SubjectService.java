@@ -15,25 +15,25 @@ public class SubjectService {
 	private SubjectImpl subjectImpl;
 	
 	public int insertSubjects(Subjects subject) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i  = subjectImpl.insertSubjects(subject);
+		return i;
 	}
 
 	
 	public Subjects getSubjects(int subid) {
-		// TODO Auto-generated method stub
-		return null;
+		Subjects sub  = subjectImpl.getSubjects(subid);
+		return sub;
 	}
 
 	
 	public List<Subjects> getAllSubjects() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Subjects> subjects = subjectImpl.getAllSubjects();
+		return subjects;
 	}
 
 	
 	public int updateSubjects(Subjects subject, int subID) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = subjectImpl.updateSubjects(subject, subID);
+		return res;
 	}
 }

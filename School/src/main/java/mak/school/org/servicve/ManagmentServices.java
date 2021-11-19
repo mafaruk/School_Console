@@ -15,26 +15,26 @@ public class ManagmentServices {
 	private ManagementImpl managementImpl;
 	
 	public int insertManagement(Mangement management) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = managementImpl.insertManagement(management);
+		return i;
 	}
 
 
 	public Mangement getMangement(int tid) {
-		// TODO Auto-generated method stub
-		return null;
+		Mangement mangement = managementImpl.getMangement(tid);
+		return mangement;
 	}
 
 
 	public List<Mangement> getAllManagement() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Mangement> mangements = managementImpl.getAllManagement();
+		return mangements;
 	}
 
 
 	public int updateMangment(Mangement mangement, int tiD) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = managementImpl.updateMangment(mangement, tiD);
+		return i;
 	}
 
 }

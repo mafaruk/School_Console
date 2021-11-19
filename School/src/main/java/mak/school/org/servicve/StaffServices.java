@@ -1,4 +1,4 @@
-package mak.school.org.servicve;
+ package mak.school.org.servicve;
 
 import java.util.List;
 
@@ -13,25 +13,23 @@ public class StaffServices {
 	private StaffImpl staffImpl;
 	
 	public int insertStaff(Staff staff) {
-		// TODO Auto-generated method stub
+		int i =  staffImpl.insertStaff(staff);
 		return 0;
 	}
 
 	
 	public Staff getStaff(int tid) {
-		// TODO Auto-generated method stub
-		return null;
+		Staff staff = staffImpl.getStaff(tid);
+		return staff;
 	}
 
-	
 	public List<Staff> getAllStaff() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Staff>  staffs = staffImpl.getAllStaff();
+		return staffs;
 	}
-
 	
 	public int updateStaff(Staff staff, int tID) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = staffImpl.updateStaff(staff, tID); 
+		return i;
 	}
 }
