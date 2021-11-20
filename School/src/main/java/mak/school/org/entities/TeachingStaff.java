@@ -1,7 +1,7 @@
 package mak.school.org.entities;
 
 public class TeachingStaff extends Staff {
-	 String SubjectID;
+	 private int SubjectID;
 
 	public TeachingStaff() {
 		super();
@@ -13,16 +13,16 @@ public class TeachingStaff extends Staff {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TeachingStaff(String subjectID) {
+	public TeachingStaff(int subjectID) {
 		super();
 		SubjectID = subjectID;
 	}
 
-	public String getSubjectID() {
+	public int getSubjectID() {
 		return SubjectID;
 	}
 
-	public void setSubjectID(String subjectID) {
+	public void setSubjectID(int subjectID) {
 		SubjectID = subjectID;
 	}
 }

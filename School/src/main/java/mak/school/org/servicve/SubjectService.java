@@ -36,4 +36,10 @@ public class SubjectService {
 		int res = subjectImpl.updateSubjects(subject, subID);
 		return res;
 	}
+	
+	public int delete(int subID) {
+		int r = subjectImpl.delete(subID);
+		return r;
+		
+	}
 }

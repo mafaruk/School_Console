@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mak.school.org.dao.StudentImpl;
-import mak.school.org.dao.SubjectImpl;
 import mak.school.org.entities.Student;
 
 @Component
@@ -32,10 +31,14 @@ public class StudentServices{
 		return students;
 	}
 
-	
 	public int updateStudent(Student student, int sID) {
 		int i = studentImpl.updateStudent(student, sID);
 		return i;
+	}
+	
+	public int delete(int sID) {
+		int r = studentImpl.delete(sID);
+		return r;
 	}
 
 }

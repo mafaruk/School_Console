@@ -9,4 +9,5 @@ public interface SubjectDao {
 	public Subjects getSubjects(int subid);
 	public List<Subjects> getAllSubjects(); 
 	public int updateSubjects(Subjects subject, int subID);
+	public int delete(int subID );
 }

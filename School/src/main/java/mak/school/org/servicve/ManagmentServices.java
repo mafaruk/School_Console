@@ -36,5 +36,10 @@ public class ManagmentServices {
 		int i = managementImpl.updateMangment(mangement, tiD);
 		return i;
 	}
+	
+	public int delete(int managementID ) {
+		int i = managementImpl.delete(managementID);
+		return i;
+	}
 
 }

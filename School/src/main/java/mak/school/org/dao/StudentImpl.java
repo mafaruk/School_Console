@@ -1,10 +1,13 @@
 package mak.school.org.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import mak.school.org.entities.Student;
@@ -16,28 +19,62 @@ public class StudentImpl implements StudentDao{
 	@Qualifier("JDBCTemplate")
 	private JdbcTemplate jdbcTemplate;
 	
+	
 	@Override
 	public int insertStudent(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+		String Query = "insert into student(studentName, rollNo,classID) values(?,?,?)";
+		int i = jdbcTemplate.update(Query, student.getStName(), student.getRollNo(), student.getClassID());
+		return i;
 	}
 
+	
 	@Override
 	public Student getStudent(int sid) {
-		// TODO Auto-generated method stub
-		return null;
+		String Query = "select * from student where studentID = ?";
+		RowMapper<Student> rowMapper= new RowMapper<Student>() {
+			public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Student student = new Student();
+				student.setStName(rs.getString("studentName"));
+				student.setRollNo(rs.getInt("rollNo"));
+				student.setStID(rs.getInt("studentID"));
+				student.setClassID(rs.getString("classID"));
+				return student;
+			}
+		};
+		Student student = jdbcTemplate.queryForObject(Query,rowMapper, sid );
+		return student;	
 	}
 
 	@Override
 	public List<Student> getAllStudent() {
-		// TODO Auto-generated method stub
-		return null;
+		String Query = "select * from student ";
+		RowMapper<Student> rowMapper= new RowMapper<Student>() {
+			public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Student student = new Student();
+				student.setStName(rs.getString("studentName"));
+				student.setRollNo(rs.getInt("rollNo"));
+				student.setStID(rs.getInt("studentID"));
+				student.setClassID(rs.getString("classID"));
+				return student;
+			}
+		};
+		List<Student> students = jdbcTemplate.query(Query,rowMapper );
+		return students;	
 	}
 
 	@Override
 	public int updateStudent(Student student, int sID) {
-		// TODO Auto-generated method stub
-		return 0;
+		String Query = "update student set studentName=?, rollNo=?, classID=?, studentID=? where studentID = ?";
+		int r = jdbcTemplate.update(Query,student.getStName(), student.getRollNo(), student.getClassID(), student.getStID(), sID);
+		return r;
+		
+	}
+
+	@Override
+	public int delete(int sID) {
+		String Query = "delete from student where studentID = ?";
+		int r = jdbcTemplate.update(Query, sID);
+		return r;
 	}
 
 }
