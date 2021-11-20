@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import mak.school.org.dao.ManagementImpl;
 import mak.school.org.entities.Mangement;
 
-@Component
+@Component("Management")
 public class ManagmentServices {
 
 	@Autowired

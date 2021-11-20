@@ -66,7 +66,7 @@ public class StaffImpl implements StaffDao {
 				public NonTeaching mapRow(ResultSet rs, int rowNum) throws SQLException {
 					NonTeaching staff  = new NonTeaching();
 					staff.setDesignation("Designation");
-					staff.settName(rs.getString("teacherName"));
+					staff.settName(rs.getString("NonTeacherName"));
 					staff.settID(rs.getInt("NonTeacherID"));
 					
 					return staff;
@@ -136,7 +136,7 @@ public class StaffImpl implements StaffDao {
 			public NonTeaching mapRow(ResultSet rs, int rowNum) throws SQLException {
 				NonTeaching staff  = new NonTeaching();
 				staff.setDesignation("Designation");
-				staff.settName(rs.getString("teacherName"));
+				staff.settName(rs.getString("NonTeacherName"));
 				staff.settID(rs.getInt("NonTeacherID"));
 				
 				return staff;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import mak.school.org.dao.StudentImpl;
 import mak.school.org.entities.Student;
 
-@Component
+@Component("Student")
 public class StudentServices{
 	
 	@Autowired

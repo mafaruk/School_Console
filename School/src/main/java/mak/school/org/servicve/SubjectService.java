@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import mak.school.org.dao.SubjectImpl;
 import mak.school.org.entities.Subjects;
 
-@Component
+@Component("Subject")
 public class SubjectService {
 	
 	@Autowired

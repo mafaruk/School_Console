@@ -6,7 +6,7 @@ public class Student {
 	private int stID;
 	private int rollNo;
 	private String classID;
-	private String passkey;
+
 	
 	public Student(String stName, int stID, int rollNo, String classID) {
 		super();
@@ -43,11 +43,5 @@ public class Student {
 	public void setClassID(String classID) {
 		this.classID = classID;
 	} 
-	public String getPasskey() {
-		return passkey;
-	}
-	public void setPasskey(String passkey) {
-		this.passkey = passkey;
-	}
-	
+
 }

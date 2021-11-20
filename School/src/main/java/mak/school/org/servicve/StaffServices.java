@@ -9,7 +9,7 @@ import mak.school.org.entities.NonTeaching;
 import mak.school.org.entities.Staff;
 import mak.school.org.entities.TeachingStaff;
 
-@Component
+@Component("staff")
 public class StaffServices {
 	
 	private StaffImpl staffImpl;

@@ -3,14 +3,7 @@ package mak.school.org.entities;
 public class Staff {
 	private String tName;
 	private int tID;
-	private String passkey;
 	
-	public String getPasskey() {
-		return passkey;
-	}
-	public void setPasskey(String passkey) {
-		this.passkey = passkey;
-	}
 	public Staff() {
 		super();
 		// TODO Auto-generated constructor stub
