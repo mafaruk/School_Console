@@ -1,8 +1,10 @@
 package mak.school.org.servicve;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
 import mak.school.org.dao.SubjectImpl;
@@ -41,5 +43,17 @@ public class SubjectService {
 		int r = subjectImpl.delete(subID);
 		return r;
 		
+	}
+	
+	public List<Subjects> getSubjectsfromClassID(int classID) {
+		
+		List<Subjects> subjects = subjectImpl.getSubjectsfromClassID(classID);
+		return subjects;	
+	}
+
+
+	public List<Subjects> getSubjectsfromTeacherID(int tid) {
+		List<Subjects> subjects = subjectImpl.getSubjectsfromTeacherID(tid);
+		return subjects;	
 	}
 }

@@ -5,10 +5,10 @@ public class Student {
 	private String stName;
 	private int stID;
 	private int rollNo;
-	private String classID;
+	private int classID;
 
 	
-	public Student(String stName, int stID, int rollNo, String classID) {
+	public Student(String stName, int stID, int rollNo, int classID) {
 		super();
 		this.stName = stName;
 		this.stID = stID;
@@ -37,10 +37,10 @@ public class Student {
 	public void setRollNo(int rollNo) {
 		this.rollNo = rollNo;
 	}
-	public String getClassID() {
+	public int getClassID() {
 		return classID;
 	}
-	public void setClassID(String classID) {
+	public void setClassID(int classID) {
 		this.classID = classID;
 	} 
 

@@ -37,7 +37,7 @@ public class StudentImpl implements StudentDao{
 				student.setStName(rs.getString("studentName"));
 				student.setRollNo(rs.getInt("rollNo"));
 				student.setStID(rs.getInt("studentID"));
-				student.setClassID(rs.getString("classID"));
+				student.setClassID(rs.getInt("classID"));
 				return student;
 			}
 		};
@@ -54,7 +54,7 @@ public class StudentImpl implements StudentDao{
 				student.setStName(rs.getString("studentName"));
 				student.setRollNo(rs.getInt("rollNo"));
 				student.setStID(rs.getInt("studentID"));
-				student.setClassID(rs.getString("classID"));
+				student.setClassID(rs.getInt("classID"));
 				return student;
 			}
 		};

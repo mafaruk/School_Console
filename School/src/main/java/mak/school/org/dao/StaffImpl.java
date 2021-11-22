@@ -30,8 +30,8 @@ public class StaffImpl implements StaffDao {
 		int i =0;
 		if(staff.equals(new TeachingStaff())) {
 			TeachingStaff teachingStaff = (TeachingStaff)staff;
-			String Query = "insert into Teacher(teacherName, subjectID) values(?,?)";
-			i = jdbcTemplate.update(Query, teachingStaff.gettName(), teachingStaff.getSubjectID());
+			String Query = "insert into Teacher(teacherName) values(?,?)";
+			i = jdbcTemplate.update(Query, teachingStaff.gettName());
 			
 		}
 		else {
@@ -49,7 +49,6 @@ public class StaffImpl implements StaffDao {
 			RowMapper<TeachingStaff> rowMapper= new RowMapper<TeachingStaff>() {
 				public TeachingStaff mapRow(ResultSet rs, int rowNum) throws SQLException {
 					TeachingStaff staff  = new TeachingStaff();
-					staff.setSubjectID(rs.getInt("subjectID"));
 					staff.settName(rs.getString("teacherName"));
 					staff.settID(rs.getInt("teacherID"));
 					
@@ -65,7 +64,7 @@ public class StaffImpl implements StaffDao {
 			RowMapper<NonTeaching> rowMapper= new RowMapper<NonTeaching>() {
 				public NonTeaching mapRow(ResultSet rs, int rowNum) throws SQLException {
 					NonTeaching staff  = new NonTeaching();
-					staff.setDesignation("Designation");
+					staff.setDesignation(rs.getString("Designation"));
 					staff.settName(rs.getString("NonTeacherName"));
 					staff.settID(rs.getInt("NonTeacherID"));
 					
@@ -83,8 +82,8 @@ public class StaffImpl implements StaffDao {
 		int i =0;
 		if(staff.equals(new TeachingStaff())) {
 			TeachingStaff teachingStaff = (TeachingStaff)staff;
-			String Query = "update Teacher set teacherID=?,	teacherName=?,	subjectID=? where teacherID = ?";
-			i = jdbcTemplate.update(Query, teachingStaff.gettID(), teachingStaff.gettName(), teachingStaff.getSubjectID(), tID);
+			String Query = "update Teacher set teacherID=?,	teacherName=? where teacherID = ?";
+			i = jdbcTemplate.update(Query, teachingStaff.gettID(), teachingStaff.gettName(),  tID);
 			
 		}
 		else {
@@ -117,7 +116,6 @@ public class StaffImpl implements StaffDao {
 		RowMapper<TeachingStaff> rowMapper= new RowMapper<TeachingStaff>() {
 			public TeachingStaff mapRow(ResultSet rs, int rowNum) throws SQLException {
 				TeachingStaff staff  = new TeachingStaff();
-				staff.setSubjectID(rs.getInt("subjectID"));
 				staff.settName(rs.getString("teacherName"));
 				staff.settID(rs.getInt("teacherID"));
 				

@@ -43,5 +43,9 @@ public class ClassroomServices {
 		return i;
 	}
 
+	public Classroom getClassroomFromTeacher(int tid) {
+		Classroom classroom = classroomimple.getClassroomFromTeacher(tid); 
+		return classroom;
+	}
 	
 }

@@ -1,28 +1,34 @@
 package mak.school.org.entities;
 
-public class TeachingStaff extends Staff {
-	 private int SubjectID;
+public class TeachingStaff implements Staff {
+	private String tName;
+	private int tID;
+
+	public String gettName() {
+		return tName;
+	}
+
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+
+	public int gettID() {
+		return tID;
+	}
+
+	public void settID(int tID) {
+		this.tID = tID;
+	}
 
 	public TeachingStaff() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TeachingStaff(String tName, int tID) {
-		super(tName, tID);
-		// TODO Auto-generated constructor stub
-	}
-
-	public TeachingStaff(int subjectID) {
+	public TeachingStaff(int subjectID, String tName, int tID) {
 		super();
-		SubjectID = subjectID;
+		this.tName = tName;
+		this.tID = tID;
 	}
 
-	public int getSubjectID() {
-		return SubjectID;
-	}
-
-	public void setSubjectID(int subjectID) {
-		SubjectID = subjectID;
-	}
 }

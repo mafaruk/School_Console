@@ -1,8 +1,27 @@
 package mak.school.org.entities;
 
-public class NonTeaching extends Staff {
+public class NonTeaching implements Staff {
 	private String designation;
+	private String tName;
+	private int tID;
 
+
+	public String gettName() {
+		return tName;
+	}
+
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+
+	public int gettID() {
+		return tID;
+	}
+
+	public void settID(int tID) {
+		this.tID = tID;
+	}
+	
 	public String getDesignation() {
 		return designation;
 	}
@@ -21,9 +40,13 @@ public class NonTeaching extends Staff {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NonTeaching(String tName, int tID) {
-		super(tName, tID);
-		// TODO Auto-generated constructor stub
-	} 
+	public NonTeaching(String designation, String tName, int tID) {
+		super();
+		this.designation = designation;
+		this.tName = tName;
+		this.tID = tID;
+	}
+
+	
 	
 }

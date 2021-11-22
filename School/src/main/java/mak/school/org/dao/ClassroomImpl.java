@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import mak.school.org.entities.Classroom;
-import mak.school.org.entities.Mangement;
 
 @Component
 public class ClassroomImpl implements ClassroomDao {
@@ -72,6 +71,21 @@ public class ClassroomImpl implements ClassroomDao {
 		String Query = "delete from Classroom where classID = ?";
 		int r = jdbcTemplate.update(Query, classID);
 		return r;
+	}
+
+	public Classroom getClassroomFromTeacher(int tid) {
+		String Query = "select * from Classroom where classTeacherID = ?";
+		RowMapper<Classroom> rowMapper= new RowMapper<Classroom>() {
+			public Classroom mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Classroom classroom = new Classroom();
+				classroom.setClassID(rs.getInt("classID"));
+				classroom.setClassroom(rs.getString("className"));
+				classroom.setTeacherID(rs.getInt("classTeacherID"));
+				return classroom;
+			}
+		};
+		Classroom classroom = jdbcTemplate.queryForObject(Query,rowMapper, tid );
+		return classroom;
 	}
 
 }

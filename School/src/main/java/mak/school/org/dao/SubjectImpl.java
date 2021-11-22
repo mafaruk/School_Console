@@ -77,4 +77,37 @@ public class SubjectImpl implements SubjectDao{
 		
 	}
 
+	@Override
+	public List<Subjects> getSubjectsfromClassID(int classID) {
+		String Query = "select * from Subject where classID =?";
+		RowMapper<Subjects> rowMapper= new RowMapper<Subjects>() {
+			public Subjects mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Subjects subject = new Subjects();
+				subject.setSubName(rs.getString("subjectName"));
+				subject.setSubId(rs.getInt("subjectID"));
+				subject.settID(rs.getInt("teacherID"));
+				subject.setClassID(rs.getInt("classID"));
+				return subject;
+			}
+		};
+		List<Subjects> subjects = jdbcTemplate.query(Query,rowMapper, classID );
+		return subjects;	
+	}
+
+	public List<Subjects> getSubjectsfromTeacherID(int tid) {
+		String Query = "select * from Subject where teacherID =?";
+		RowMapper<Subjects> rowMapper= new RowMapper<Subjects>() {
+			public Subjects mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Subjects subject = new Subjects();
+				subject.setSubName(rs.getString("subjectName"));
+				subject.setSubId(rs.getInt("subjectID"));
+				subject.settID(rs.getInt("teacherID"));
+				subject.setClassID(rs.getInt("classID"));
+				return subject;
+			}
+		};
+		List<Subjects> subjects = jdbcTemplate.query(Query,rowMapper, tid );
+		return subjects;	
+	}
+
 }
