@@ -23,8 +23,8 @@ public class SubjectImpl implements SubjectDao{
 	
 	@Override
 	public int insertSubjects(Subjects subject) {
-		String Query = "insert into Subject(subjectName	teacherID	classID) values(?,?,?)";
-		int i = jdbcTemplate.update(Query, subject.getSubName(), subject.gettID(), subject.getClassID());
+		String Query = "insert into Subject(subjectID,subjectName,	teacherID,	classID) values(?,?,?,?)";
+		int i = jdbcTemplate.update(Query, subject.getSubId(),subject.getSubName(), subject.gettID(), subject.getClassID());
 		return i;
 	}
 

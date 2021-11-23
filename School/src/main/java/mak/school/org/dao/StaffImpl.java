@@ -30,14 +30,14 @@ public class StaffImpl implements StaffDao {
 		int i =0;
 		if(staff.equals(new TeachingStaff())) {
 			TeachingStaff teachingStaff = (TeachingStaff)staff;
-			String Query = "insert into Teacher(teacherName) values(?,?)";
-			i = jdbcTemplate.update(Query, teachingStaff.gettName());
+			String Query = "insert into Teacher(teacherID,teacherName) values(?,?)";
+			i = jdbcTemplate.update(Query, teachingStaff.gettID(),teachingStaff.gettName());
 			
 		}
 		else {
 			NonTeaching nonTeaching = (NonTeaching)staff;
-			String Query = "insert into NonTeacher(NonTeacherName, Designation) values(?,?)";
-			i = jdbcTemplate.update(Query, nonTeaching.gettName(), nonTeaching.getDesignation());
+			String Query = "insert into NonTeacher(NonTeacherID,NonTeacherName, Designation) values(?,?,?)";
+			i = jdbcTemplate.update(Query,nonTeaching.gettID() ,nonTeaching.gettName(), nonTeaching.getDesignation());
 		}
 		return i;
 	}

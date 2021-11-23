@@ -14,8 +14,8 @@ public class ManagmentServices {
 	@Autowired
 	private ManagementImpl managementImpl;
 	
-	public int insertManagement(Mangement management) {
-		int i = managementImpl.insertManagement(management);
+	public int insertManagement(Mangement management, boolean isTeachingstaff) {
+		int i = managementImpl.insertManagement(management,isTeachingstaff);
 		return i;
 	}
 
@@ -32,8 +32,8 @@ public class ManagmentServices {
 	}
 
 
-	public int updateMangment(Mangement mangement, int tiD) {
-		int i = managementImpl.updateMangment(mangement, tiD);
+	public int updateMangment(Mangement mangement, int tiD,boolean isTeachingstaff) {
+		int i = managementImpl.updateMangment(mangement, tiD, isTeachingstaff);
 		return i;
 	}
 	

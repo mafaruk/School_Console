@@ -22,8 +22,8 @@ public class ClassroomImpl implements ClassroomDao {
 	//classID	className	classTeacherID
 	@Override
 	public int insertClass(Classroom classroom) {
-		String Query = "insert into Classroom(className	classTeacherID) values(?,?)";
-		int i = jdbcTemplate.update(Query,classroom.getClassroom() ,classroom.getTeacherID());
+		String Query = "insert into Classroom(classID,className	classTeacherID) values(?,?,?)";
+		int i = jdbcTemplate.update(Query,classroom.getClassID(),classroom.getClassroom() ,classroom.getTeacherID());
 		return i;
 	}
 

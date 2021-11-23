@@ -19,7 +19,7 @@ public class App {
 	private Consoles consoles;
 	
 	@Autowired
-	private BufferedReader reader;// = new BufferedReader(new InputStreamReader(System.in));
+	private BufferedReader reader;
 	
 	 public App(ApplicationContext context) {
 			super();
@@ -32,10 +32,17 @@ public class App {
 			// TODO Auto-generated constructor stub
 		}
 
-	public void homeConsole() throws NumberFormatException, IOException {
+	public void homeConsole() {
 		System.out.println("\n\nwelcome to School Portal\n");
         System.out.println("you are ? \n1.Student \n2.Staff \n3.Management Staff \n\nEnter the Number:-");
-        int role = Integer.parseInt(reader.readLine());
+        int role =0;
+       try {
+    	   role = Integer.parseInt(reader.readLine());  
+       } 
+       catch(NumberFormatException | IOException ex) {
+			System.err.println("Invalid input");
+			homeConsole();
+		}
         switch (role) {
 		case 1:
 			consoles.getStudentConsole();
@@ -48,7 +55,8 @@ public class App {
 			break;
 
 		default:
-			System.out.println("Invalid Role");
+			System.out.println("Invalid Role, Try Again");
+			homeConsole();
 			break;
 		}
         
@@ -57,7 +65,7 @@ public class App {
 	
    
 
-	public static void main( String[] args ) throws NumberFormatException, IOException
+	public static void main( String[] args )
     {
 		context = new AnnotationConfigApplicationContext(SpringConfig.class);
     	new App(context).homeConsole();

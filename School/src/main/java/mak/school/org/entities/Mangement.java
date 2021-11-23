@@ -2,6 +2,13 @@ package mak.school.org.entities;
 
 public class Mangement {
 	private int tID;
+	private int ntID;
+	public int getNtID() {
+		return ntID;
+	}
+	public void setNtID(int ntID) {
+		this.ntID = ntID;
+	}
 	private int mngtID;
 	private String designation;
 	public Mangement() {

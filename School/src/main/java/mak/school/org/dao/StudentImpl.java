@@ -22,8 +22,8 @@ public class StudentImpl implements StudentDao{
 	
 	@Override
 	public int insertStudent(Student student) {
-		String Query = "insert into student(studentName, rollNo,classID) values(?,?,?)";
-		int i = jdbcTemplate.update(Query, student.getStName(), student.getRollNo(), student.getClassID());
+		String Query = "insert into student(studentID,studentName, rollNo,classID) values(?,?,?,?)";
+		int i = jdbcTemplate.update(Query, student.getStID(),student.getStName(), student.getRollNo(), student.getClassID());
 		return i;
 	}
 
@@ -75,6 +75,14 @@ public class StudentImpl implements StudentDao{
 		String Query = "delete from student where studentID = ?";
 		int r = jdbcTemplate.update(Query, sID);
 		return r;
+	}
+
+
+	public int getNewStudentID() {
+		String Query = "select max(studentID) as newID from student";
+		Integer studentID = jdbcTemplate.queryForObject(Query, Integer.class );
+		return studentID+1;
+				
 	}
 
 }

@@ -35,6 +35,11 @@ public class SubjectMapper {
 		}
 	}
 
+	public void displaySubjectsOption(ManagementMapper managementMapper) {
+		System.out.println("in "+this.toString());
+		
+	}
+
 	
 	
 }

@@ -62,4 +62,9 @@ public class StudentServices{
 		return r;
 	}
 
+	public int getNewStudentID() {
+		int newId = studentImpl.getNewStudentID();
+		return newId;
+	}
+
 }

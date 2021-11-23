@@ -46,6 +46,11 @@ public class StaffMapper {
 		
 	}
 
+	public void displaySudentOption(ManagementMapper managementMapper, boolean isTeaching) {
+		System.out.println("in "+this.toString());
+		
+	}
+
 	
 	
 }

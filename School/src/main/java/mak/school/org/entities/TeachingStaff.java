@@ -25,7 +25,7 @@ public class TeachingStaff implements Staff {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TeachingStaff(int subjectID, String tName, int tID) {
+	public TeachingStaff( String tName, int tID) {
 		super();
 		this.tName = tName;
 		this.tID = tID;
