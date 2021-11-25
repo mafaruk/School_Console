@@ -100,8 +100,7 @@ public class ClassroomMapper {
 				try {
 					managementMapper.displayManagerialOperationConsoles();
 				} catch (NumberFormatException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.println("Invalid Input" + e.getMessage());
 				}
 				break;
 			default:

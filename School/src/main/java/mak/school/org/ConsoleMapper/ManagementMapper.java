@@ -193,8 +193,7 @@ public class ManagementMapper {
 				try {
 					managementMapper.displayManagerialOperationConsoles();
 				} catch (NumberFormatException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.println("Invalid Input" + e.getMessage());
 				}
 				break;
 			default:
@@ -387,8 +386,7 @@ public class ManagementMapper {
 		
 			displayManagerialOperationConsoles();
 		} catch (NumberFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Invalid Input" + e.getMessage());
 		}
 		
 	}
