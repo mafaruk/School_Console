@@ -42,4 +42,10 @@ public class ManagmentServices {
 		return i;
 	}
 
+
+	public int getMgmtID( ) {
+		// TODO Auto-generated method stub
+		return managementImpl.getMgmtID();
+	}
+
 }

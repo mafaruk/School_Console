@@ -2,15 +2,10 @@ package mak.school.org.entities;
 
 public class Mangement {
 	private int tID;
-	private int ntID;
-	public int getNtID() {
-		return ntID;
-	}
-	public void setNtID(int ntID) {
-		this.ntID = ntID;
-	}
+	private int nTID;
 	private int mngtID;
 	private String designation;
+	
 	public Mangement() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,6 +15,12 @@ public class Mangement {
 		this.tID = tID;
 		this.mngtID = mngtID;
 		this.designation = designation;
+	}
+	public int getnTID() {
+		return nTID;
+	}
+	public void setnTID(int nTID) {
+		this.nTID = nTID;
 	}
 	public int gettID() {
 		return tID;

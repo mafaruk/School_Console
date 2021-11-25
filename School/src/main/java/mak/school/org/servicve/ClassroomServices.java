@@ -47,5 +47,11 @@ public class ClassroomServices {
 		Classroom classroom = classroomimple.getClassroomFromTeacher(tid); 
 		return classroom;
 	}
+
+
+	public int getNewStafftID() {
+		return classroomimple.getNewStafftID();
+		
+	}
 	
 }

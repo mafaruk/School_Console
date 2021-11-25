@@ -28,7 +28,7 @@ public class ManagementImpl implements ManagementDao {
 		}
 		else {
 			String Query = "insert into Management(managementID,nonTeacherID, Designation) values(?,?,?)";
-			int i = jdbcTemplate.update(Query,management.getMngtID(), management.getNtID(), management.getDesignation());
+			int i = jdbcTemplate.update(Query,management.getMngtID(), management.getnTID(), management.getDesignation());
 			return i;
 		}
 		
@@ -42,7 +42,7 @@ public class ManagementImpl implements ManagementDao {
 				Mangement mangement = new Mangement();
 				mangement.setMngtID(rs.getInt("managementID"));
 				mangement.settID(rs.getInt("teacherID"));
-				mangement.setNtID(rs.getInt("nonTeacherID"));
+				mangement.setnTID(rs.getInt("nonTeacherID"));
 				mangement.setDesignation(rs.getString("Designation"));
 				return mangement;
 			}
@@ -59,7 +59,7 @@ public class ManagementImpl implements ManagementDao {
 				Mangement mangement = new Mangement();
 				mangement.setMngtID(rs.getInt("managementID"));
 				mangement.settID(rs.getInt("teacherID"));
-				mangement.setNtID(rs.getInt("nonTeacherID"));
+				mangement.setnTID(rs.getInt("nonTeacherID"));
 				mangement.setDesignation(rs.getString("Designation"));
 				return mangement;
 			}
@@ -90,4 +90,25 @@ public class ManagementImpl implements ManagementDao {
 		int r = jdbcTemplate.update(Query, managementID);
 		return r;
 	}
+
+	public int updateTeacherForManagment(int tID, boolean isTeachingStaff) {
+		if(isTeachingStaff) {
+			String Query = "update Management set  teacherID=?,  Designation=? where teacherID = ?";
+			int r = jdbcTemplate.update(Query,0,"Not assigned", tID);
+			return r;
+		}
+		else {
+			String Query = "update Management set nonTeacherID=?,  Designation=? where nonTeacherID = ?";
+			int r = jdbcTemplate.update(Query,0,"Not assigned",tID);
+			return r;
+		}
+	}
+
+	public int getMgmtID() {
+	
+			String Query = "select max(managementID) as newID from Management";
+			Integer mgmtID = jdbcTemplate.queryForObject(Query, Integer.class );
+			return mgmtID+1;
+	}
+	
 }

@@ -46,4 +46,10 @@ public class StaffServices {
 		int i = staffImpl.delete(tID, isTeachingStaff);
 		return i;
 	}
+
+
+	public int getNewStafftID(boolean isTeachingStaff) {
+		int i = staffImpl.getNewStafftID(isTeachingStaff);
+		return i;
+	}
 }

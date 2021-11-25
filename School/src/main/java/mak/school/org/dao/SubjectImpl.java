@@ -110,4 +110,10 @@ public class SubjectImpl implements SubjectDao{
 		return subjects;	
 	}
 
+	public int updateTeacherForSubject(int tID) {
+		String Query = "update subject set 	teacherID=? where teacherID=?";
+		int r = jdbcTemplate.update(Query,0, tID);
+		return r;
+	}
+
 }

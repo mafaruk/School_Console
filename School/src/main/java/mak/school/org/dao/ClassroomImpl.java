@@ -88,4 +88,16 @@ public class ClassroomImpl implements ClassroomDao {
 		return classroom;
 	}
 
+	public int updateTeacherForClassroom(int tID) {
+		String Query = "update Classroom set classTeacherID=? where classTeacherID = ?";
+		int r = jdbcTemplate.update(Query,0,tID);
+		return r;
+	}
+
+	public int getNewStafftID() {
+		String Query = "select max(classTeacherID) as newID from Classroom";
+		Integer classID = jdbcTemplate.queryForObject(Query, Integer.class );
+		return classID+1;
+	}
+
 }

@@ -76,7 +76,7 @@ public class Consoles {
 		try {
 			System.out.println("Enter You Management ID:- ");
 			int i = Integer.parseInt(reader.readLine());
-			managementMapper.displayManagement(i);
+			managementMapper.displayManagementWithConsole(i);
 		} catch (NumberFormatException | IOException ex) {
 			System.err.println("Invalid input");
 			getManagementStaffConsole();

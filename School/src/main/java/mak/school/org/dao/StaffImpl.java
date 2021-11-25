@@ -22,13 +22,22 @@ public class StaffImpl implements StaffDao {
 	@Qualifier("JDBCTemplate")
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	@Autowired
+	SubjectImpl subjectImpl;
+	
+	@Autowired
+	ClassroomImpl classroomImpl;
+	
+	@Autowired
+	ManagementImpl managementImpl;
 	//NonTeacherID	NonTeacherName	Designation
 	//teacherID	teacherName	subjectID
 	
 	@Override
 	public int insertStaff(Staff staff) {
 		int i =0;
-		if(staff.equals(new TeachingStaff())) {
+		if(staff instanceof TeachingStaff) {
 			TeachingStaff teachingStaff = (TeachingStaff)staff;
 			String Query = "insert into Teacher(teacherID,teacherName) values(?,?)";
 			i = jdbcTemplate.update(Query, teachingStaff.gettID(),teachingStaff.gettName());
@@ -80,7 +89,7 @@ public class StaffImpl implements StaffDao {
 	@Override
 	public int updateStaff(Staff staff, int tID) {
 		int i =0;
-		if(staff.equals(new TeachingStaff())) {
+		if(staff instanceof TeachingStaff) {
 			TeachingStaff teachingStaff = (TeachingStaff)staff;
 			String Query = "update Teacher set teacherID=?,	teacherName=? where teacherID = ?";
 			i = jdbcTemplate.update(Query, teachingStaff.gettID(), teachingStaff.gettName(),  tID);
@@ -98,9 +107,13 @@ public class StaffImpl implements StaffDao {
 	@Override
 	public int delete(int tID, boolean isTeachingStaff) {
 		if(isTeachingStaff) {
-			String Query = "delete from Teacher where teacherID = ?";
-			int r = jdbcTemplate.update(Query, tID);
-			return r;
+			subjectImpl.updateTeacherForSubject(tID) ;
+			classroomImpl.updateTeacherForClassroom(tID); 
+			managementImpl.updateTeacherForManagment(tID,isTeachingStaff);
+				String Query = "delete from Teacher where teacherID = ?";
+				int r = jdbcTemplate.update(Query, tID);
+				return r;
+		
 		}
 		else {
 			String Query = "delete from NonTeacher where NonTeacherID = ?";
@@ -133,7 +146,7 @@ public class StaffImpl implements StaffDao {
 		RowMapper<NonTeaching> rowMapper= new RowMapper<NonTeaching>() {
 			public NonTeaching mapRow(ResultSet rs, int rowNum) throws SQLException {
 				NonTeaching staff  = new NonTeaching();
-				staff.setDesignation("Designation");
+				staff.setDesignation(rs.getString("Designation"));
 				staff.settName(rs.getString("NonTeacherName"));
 				staff.settID(rs.getInt("NonTeacherID"));
 				
@@ -142,6 +155,20 @@ public class StaffImpl implements StaffDao {
 		};
 		List<NonTeaching> staff = jdbcTemplate.query(Query,rowMapper);
 		return staff;	
+	}
+
+	public int getNewStafftID(boolean isTeachingStaff) {
+		if(isTeachingStaff) {
+			String Query = "select max(teacherID) as newID from Teacher";
+			Integer staffID = jdbcTemplate.queryForObject(Query, Integer.class );
+			return staffID+1;
+		}
+		else{
+			String Query = "select max(NonTeacherID) as newID from NonTeacher";
+			Integer staffID = jdbcTemplate.queryForObject(Query, Integer.class );
+			return staffID+1;
+		}
+		
 	}
 
 	

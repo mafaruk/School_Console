@@ -70,7 +70,7 @@ public class StudentMapper {
 		if (object instanceof ManagementMapper) {
 			managementMapper = (ManagementMapper) object;
 			System.out.println(
-					"\n1.Add New Student's Information \n2.Update Student's Information \n3.Delete Student's Information \n4.Search Student's Information \n5.Show All Students' Information ");
+					"\n1.Add New Student's Information \n2.Update Student's Information \n3.Delete Student's Information \n4.Search Student's Information \n5.Show All Students' Information \nPress N to go back to Managerial Console ");
 			String sch = null;
 			try {
 				sch = reader.readLine();
@@ -79,7 +79,7 @@ public class StudentMapper {
 				displayStudentOptions(managementMapper);
 			}
 			
-			switch (sch) {
+			switch (sch.toUpperCase()) {
 			case "1":
 				insertStudent();
 				break;
@@ -95,7 +95,14 @@ public class StudentMapper {
 			case "5":
 				showAllStudent();
 				break;
-
+			case "N":
+				try {
+					managementMapper.displayManagerialOperationConsoles();
+				} catch (NumberFormatException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 			default:
 				System.err.println("invalid choice");
 				displayStudentOptions(managementMapper);
@@ -104,13 +111,17 @@ public class StudentMapper {
 
 		}
 	}
-
-	private void showAllStudent() {
+	
+	private void displayAllStudent() {
 		List<Student> studentList = studentServices.getAllStudent();
 		System.out.println("Roll No \t Student Name\t\t\t\t Classroom");
 		for (Student student : studentList) {
 			System.out.println(student.getRollNo()+"\t"+student.getStName()+ "\t\t"+classroomMapper.getClassroomName(student.getClassID()));
 		}
+	}
+
+	private void showAllStudent() {
+		displayAllStudent();
 		displayStudentOptions(managementMapper);
 	}
 
@@ -174,14 +185,15 @@ public class StudentMapper {
 			System.out.println("Name :- " + student.getStName());
 			System.out.println("Roll NO :- " + student.getRollNo());
 			studentinfo.setStID(student.getStID());
-			System.out.println("Enter Student Roll no");
+			System.out.println("Enter Updated Student Roll no");
 			int Roll = Integer.parseInt(reader.readLine());
 			studentinfo.setRollNo(Roll);
-			System.out.println("Enter Student Name");
+			System.out.println("Enter Updated Student Name");
 			String Name = reader.readLine();
 			studentinfo.setStName(Name);
-			System.out.println("Choose Classroom, Enter ClassID not the Classroom");
+			System.out.println("Choose Updated Classroom");
 			classroomMapper.displayAllClassrooms();
+			System.out.println(" Enter ClassID not the Classroom");
 			int classroom = Integer.parseInt(reader.readLine());
 			studentinfo.setClassID(classroom);
 			studentServices.updateStudent(studentinfo, i);
