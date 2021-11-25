@@ -62,7 +62,7 @@ public class StaffMapper {
 			System.out.println(staff.gettName());
 
 		} else {
-			staff = staffServices.getStaff(tid, true);
+			staff = staffServices.getStaff(tid, false);
 			System.out.println(staff.gettName());
 
 		}
@@ -210,11 +210,11 @@ public class StaffMapper {
 
 				System.out.println("Enter Teacher ID:- ");
 				 i = Integer.parseInt(reader.readLine());
-				 dispalyTeacher(i, isTeaching);	
+				 dispalyTeacher(i, true);	
 			}else {
 				System.out.println("Enter Teacher ID:- ");
 				 i = Integer.parseInt(reader.readLine());
-				 dispalyTeacher(i, isTeaching);
+				 dispalyTeacher(i, false);
 			}
 			System.out.println("Are You sure? you want to delete Teacher Info. Y/N");
 			String ch = reader.readLine();
@@ -245,13 +245,13 @@ public class StaffMapper {
 				
 				System.out.println("Enter Teacher ID:- ");
 				 i = Integer.parseInt(reader.readLine());
-				 dispalyTeacher(i, isTeaching);
+				 dispalyTeacher(i, true);
 				 
 			}else {
 				
 				System.out.println("Enter Teacher ID:- ");
 				 i = Integer.parseInt(reader.readLine());
-				dispalyTeacher(i, isTeaching);
+				dispalyTeacher(i, false);
 				
 			}
 		} catch (Exception e) {
