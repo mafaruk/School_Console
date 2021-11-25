@@ -56,4 +56,9 @@ public class SubjectService {
 		List<Subjects> subjects = subjectImpl.getSubjectsfromTeacherID(tid);
 		return subjects;	
 	}
+
+
+	public int getSubjectID() {
+		return subjectImpl.getSubjectID();
+	}
 }

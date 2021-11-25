@@ -36,7 +36,7 @@ public class ClassroomMapper {
 
 	public void displayClassroom(int classID) {
 		classroom = classroomServices.getClass(classID);
-		System.out.println("Class");
+		System.out.println("Classroom:- "+classroom.getClassroom());
 	}
 
 	public void displayTeacherFromClassroom(int classID) {
@@ -118,7 +118,7 @@ public class ClassroomMapper {
 		try {
 			int id = classroomServices.getNewStafftID();
 			System.out.println("New Classroom ID is " + id
-					+ ", Classroom ID is important, remember it & do not share it with anyone ");
+					+ ",");
 			classroom.setClassID(id);
 
 			System.out.println("Enter Classroom");

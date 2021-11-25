@@ -116,4 +116,11 @@ public class SubjectImpl implements SubjectDao{
 		return r;
 	}
 
+	public int getSubjectID() {
+		String Query = "select max(subjectID) as newID from subject";
+		Integer subID = jdbcTemplate.queryForObject(Query, Integer.class );
+		return subID+1;
+		
+	}
+
 }
