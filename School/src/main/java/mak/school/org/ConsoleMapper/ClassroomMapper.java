@@ -24,7 +24,7 @@ public class ClassroomMapper {
 
 	@Autowired
 	ManagementMapper managementMapper;
-	
+
 	@Autowired
 	BufferedReader reader;
 
@@ -36,7 +36,7 @@ public class ClassroomMapper {
 
 	public void displayClassroom(int classID) {
 		classroom = classroomServices.getClass(classID);
-		System.out.println("Classroom:- "+classroom.getClassroom());
+		System.out.println("Classroom:- " + classroom.getClassroom());
 	}
 
 	public void displayTeacherFromClassroom(int classID) {
@@ -44,7 +44,7 @@ public class ClassroomMapper {
 		System.out.println("Classroom :- " + classroom.getClassroom());
 		int tid = classroom.getTeacherID();
 		System.out.print("Class Teacher :- ");
-		staffMapper.dispalyTeacherName(tid,true);
+		staffMapper.dispalyTeacherName(tid, true);
 
 	}
 
@@ -59,8 +59,8 @@ public class ClassroomMapper {
 			System.out.println("\nClassroom :- " + classroom.getClassroom());
 			int tid = classroom.getTeacherID();
 			System.out.print("Class Teacher :- ");
-			staffMapper.dispalyTeacherName(tid,true);
-			
+			staffMapper.dispalyTeacherName(tid, true);
+
 		}
 	}
 
@@ -78,53 +78,52 @@ public class ClassroomMapper {
 			String sch = null;
 			try {
 				sch = reader.readLine();
+
+				switch (sch) {
+				case "1":
+					insertClassroom();
+					break;
+				case "2":
+					updatedClassroom();
+					break;
+				case "3":
+					searchClassroom();
+					break;
+				case "4":
+					showAllClassroom();
+					break;
+				case "N":
+					try {
+						managementMapper.displayManagerialOperationConsoles();
+					} catch (NumberFormatException | IOException e) {
+						System.err.println("Invalid Input" + e.getMessage());
+					}
+					break;
+				default:
+					System.err.println("invalid choice");
+					displayClassroomOptions(managementMapper);
+					break;
+				}
 			} catch (Exception e) {
 				System.err.println("Invalid input");
 				displayClassroomOptions(managementMapper);
-			}
-
-			switch (sch) {
-			case "1":
-				insertClassroom();
-				break;
-			case "2":
-				updatedClassroom();
-				break;
-			case "3":
-				searchClassroom();
-				break;
-			case "4":
-				showAllClassroom();
-				break;
-			case "N":
-				try {
-					managementMapper.displayManagerialOperationConsoles();
-				} catch (NumberFormatException | IOException e) {
-					System.err.println("Invalid Input" + e.getMessage());
-				}
-				break;
-			default:
-				System.err.println("invalid choice");
-				displayClassroomOptions(managementMapper);
-				break;
 			}
 
 		}
 	}
 
 	private void insertClassroom() {
-		
+
 		try {
 			int id = classroomServices.getNewStafftID();
-			System.out.println("New Classroom ID is " + id
-					+ ",");
+			System.out.println("New Classroom ID is " + id + ",");
 			classroom.setClassID(id);
 
 			System.out.println("Enter Classroom");
 			String Name;
 			Name = reader.readLine();
 			classroom.setClassroom(Name);
-			
+
 			System.out.println("Choose Teacher,");
 			staffMapper.displayAllStaff(true);
 			System.out.println("Enter Teacher ID not the Teacher's Name");
@@ -134,8 +133,7 @@ public class ClassroomMapper {
 		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			insertClassroom();
-		}
-		finally {
+		} finally {
 			displayClassroomOptions(managementMapper);
 		}
 	}
@@ -145,31 +143,30 @@ public class ClassroomMapper {
 			System.out.println("Enter Classroom ID:- ");
 			int i = Integer.parseInt(reader.readLine());
 			classroom = classroomServices.getClass(i);
-			
+
 			System.out.println("Classroom :- " + classroom.getClassroom());
 			int tid = classroom.getTeacherID();
 			System.out.print("Class Teacher :- ");
-			staffMapper.dispalyTeacherName(tid,true);
-			
+			staffMapper.dispalyTeacherName(tid, true);
+
 			System.out.println("Enter Updated Classroom");
 			String Name;
 			Name = reader.readLine();
 			classroom.setClassroom(Name);
-			
+
 			System.out.println("Choose Updated Teacher,");
 			staffMapper.displayAllStaff(true);
 			System.out.println("Enter Teacher ID not the Teacher's Name");
 			int teacher = Integer.parseInt(reader.readLine());
 			classroom.setTeacherID(teacher);
 			classroomServices.updateClass(classroom, i);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			updatedClassroom();
-		}
-		finally {
+		} finally {
 			displayClassroomOptions(managementMapper);
-		}		
-		
+		}
+
 	}
 
 	private void searchClassroom() {
@@ -177,27 +174,25 @@ public class ClassroomMapper {
 			System.out.println("Enter Classroom ID:- ");
 			int i = Integer.parseInt(reader.readLine());
 			displayTeacherFromClassroom(i);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			searchClassroom();
-		}
-		finally {
+		} finally {
 			displayClassroomOptions(managementMapper);
-		}	
-		
+		}
+
 	}
 
 	private void showAllClassroom() {
 		try {
 			displayAllClassrooms();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			showAllClassroom();
-		}
-		finally {
+		} finally {
 			displayClassroomOptions(managementMapper);
 		}
-		
+
 	}
 
 }

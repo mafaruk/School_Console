@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mak.school.org.entities.Staff;
 import mak.school.org.entities.Subjects;
 import mak.school.org.servicve.SubjectService;
 
@@ -62,40 +61,39 @@ public class SubjectMapper {
 			String sch = null;
 			try {
 				sch = reader.readLine();
+
+				switch (sch) {
+				case "1":
+					insertSubject();
+					break;
+				case "2":
+					updatedSubject();
+					break;
+				case "3":
+					deleteSubject();
+					break;
+				case "4":
+					searchSubject();
+					break;
+				case "5":
+					showAllSubject();
+					break;
+				case "N":
+					try {
+						managementMapper.displayManagerialOperationConsoles();
+					} catch (NumberFormatException | IOException e) {
+						System.err.println("Invalid Input" + e.getMessage());
+					}
+					break;
+				default:
+					System.err.println("invalid choice");
+					displaySubjectsOption(managementMapper);
+					break;
+				}
 			} catch (Exception e) {
 				System.err.println("Invalid input");
 				displaySubjectsOption(managementMapper);
 			}
-
-			switch (sch) {
-			case "1":
-				insertSubject();
-				break;
-			case "2":
-				updatedSubject();
-				break;
-			case "3":
-				deleteSubject();
-				break;
-			case "4":
-				searchSubject();
-				break;
-			case "5":
-				showAllSubject();
-				break;
-			case "N":
-				try {
-					managementMapper.displayManagerialOperationConsoles();
-				} catch (NumberFormatException | IOException e) {
-					System.err.println("Invalid Input" + e.getMessage());
-				}
-				break;
-			default:
-				System.err.println("invalid choice");
-				displaySubjectsOption(managementMapper);
-				break;
-			}
-
 		}
 	}
 
@@ -106,7 +104,8 @@ public class SubjectMapper {
 			int subid = Integer.parseInt(reader.readLine());
 			Subjects subject2 = subjectService.getSubjects(subid);
 			System.out.println("Name:- " + subject2.getSubName());
-			System.out.print("Teacher");staffMapper.dispalyTeacher(subject2.gettID(), true);
+			System.out.print("Teacher");
+			staffMapper.dispalyTeacher(subject2.gettID(), true);
 			classroomMapper.displayClassroom(subject2.getClassID());
 			System.out.println("Are You sure? you want to delete Subject Info. Y/N");
 			String ch = reader.readLine();
@@ -142,7 +141,6 @@ public class SubjectMapper {
 			System.out.println("Enter Teacher ID not the Teacher's Name");
 			int teacher = Integer.parseInt(reader.readLine());
 			subjects.settID(teacher);
-
 
 			classroomMapper.displayAllClassrooms();
 			System.out.println("Choose Classroom, Enter ClassID not the Classroom");
@@ -181,7 +179,6 @@ public class SubjectMapper {
 			int teacher = Integer.parseInt(reader.readLine());
 			subjects.settID(teacher);
 
-			
 			classroomMapper.displayAllClassrooms();
 			System.out.println("Choose Classroom, Enter ClassID not the Classroom");
 			int classroom = Integer.parseInt(reader.readLine());
@@ -203,7 +200,8 @@ public class SubjectMapper {
 			int subid = Integer.parseInt(reader.readLine());
 			Subjects subject2 = subjectService.getSubjects(subid);
 			System.out.println("Name:- " + subject2.getSubName());
-			System.out.print("Teacher");staffMapper.dispalyTeacher(subject2.gettID(), true);
+			System.out.print("Teacher");
+			staffMapper.dispalyTeacher(subject2.gettID(), true);
 			classroomMapper.displayClassroom(subject2.getClassID());
 		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
@@ -212,12 +210,13 @@ public class SubjectMapper {
 			displaySubjectsOption(managementMapper);
 		}
 	}
-	
+
 	public void displayAllSubject() {
 		List<Subjects> subjectlist = subjectService.getAllSubjects();
 		for (Subjects subjects : subjectlist) {
 			System.out.println("Name:- " + subjects.getSubName());
-			System.out.print("Teacher");staffMapper.dispalyTeacher(subjects.gettID(), true);
+			System.out.print("Teacher");
+			staffMapper.dispalyTeacher(subjects.gettID(), true);
 			classroomMapper.displayClassroom(subjects.getClassID());
 		}
 	}

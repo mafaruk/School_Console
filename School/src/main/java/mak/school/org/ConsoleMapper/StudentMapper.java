@@ -25,9 +25,9 @@ public class StudentMapper {
 
 	@Autowired
 	BufferedReader reader;
-	 
+
 	Student studentinfo;
-	
+
 	@Autowired
 	ManagementMapper managementMapper;
 
@@ -37,7 +37,7 @@ public class StudentMapper {
 
 	}
 
-	public void displayStudent(int i)  {
+	public void displayStudent(int i) {
 		Student student = studentServices.getStudent(i);
 		System.out.println("Name :- " + student.getStName());
 		System.out.println("Roll NO :- " + student.getRollNo());
@@ -48,20 +48,16 @@ public class StudentMapper {
 			String choice = reader.readLine();
 			if (choice.equalsIgnoreCase("Y")) {
 				subjectMapper.displaySubjectsFromClassroom(cid);
-			} else if(choice.equalsIgnoreCase("N")){
+			} else if (choice.equalsIgnoreCase("N")) {
 				App.main(null);
-			}
-			else {
+			} else {
 				throw new Exception();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Invalid Input, Considering this As NO");
-		}
-		finally {
+		} finally {
 			App.main(null);
 		}
-		
 
 	}
 
@@ -74,48 +70,49 @@ public class StudentMapper {
 			String sch = null;
 			try {
 				sch = reader.readLine();
+
+				switch (sch.toUpperCase()) {
+				case "1":
+					insertStudent();
+					break;
+				case "2":
+					updatedStudent();
+					break;
+				case "3":
+					deleteStudent();
+					break;
+				case "4":
+					searchStudent();
+					break;
+				case "5":
+					showAllStudent();
+					break;
+				case "N":
+					try {
+						managementMapper.displayManagerialOperationConsoles();
+					} catch (NumberFormatException | IOException e) {
+						System.err.println("Invalid Input" + e.getMessage());
+					}
+					break;
+				default:
+					System.err.println("invalid choice");
+					displayStudentOptions(managementMapper);
+					break;
+				}
 			} catch (Exception e) {
 				System.err.println("Invalid input");
 				displayStudentOptions(managementMapper);
 			}
-			
-			switch (sch.toUpperCase()) {
-			case "1":
-				insertStudent();
-				break;
-			case "2":
-				updatedStudent();
-				break;
-			case "3":
-				deleteStudent();
-				break;
-			case "4":
-				searchStudent();
-				break;
-			case "5":
-				showAllStudent();
-				break;
-			case "N":
-				try {
-					managementMapper.displayManagerialOperationConsoles();
-				} catch (NumberFormatException | IOException e) {
-					System.err.println("Invalid Input" + e.getMessage());
-				}
-				break;
-			default:
-				System.err.println("invalid choice");
-				displayStudentOptions(managementMapper);
-				break;
-			}
 
 		}
 	}
-	
+
 	private void displayAllStudent() {
 		List<Student> studentList = studentServices.getAllStudent();
 		System.out.println("Roll No \t Student Name\t\t\t\t Classroom");
 		for (Student student : studentList) {
-			System.out.println(student.getRollNo()+"\t"+student.getStName()+ "\t\t"+classroomMapper.getClassroomName(student.getClassID()));
+			System.out.println(student.getRollNo() + "\t" + student.getStName() + "\t\t"
+					+ classroomMapper.getClassroomName(student.getClassID()));
 		}
 	}
 
@@ -129,18 +126,14 @@ public class StudentMapper {
 			System.out.println("Enter Student ID:- ");
 			int i = Integer.parseInt(reader.readLine());
 			displayStudent(i);
-			
-		}
-		catch(Exception ex){
-			System.err.println("Invalid Input"+ex.getMessage());
+
+		} catch (Exception ex) {
+			System.err.println("Invalid Input" + ex.getMessage());
 			searchStudent();
-		}
-		finally {
+		} finally {
 			displayStudentOptions(managementMapper);
 		}
-		
-	
-		
+
 	}
 
 	private void deleteStudent() {
@@ -152,31 +145,25 @@ public class StudentMapper {
 			System.out.println("Roll NO :- " + student.getRollNo());
 			System.out.println("Are You sure? you want to delete student Info. Y/N");
 			String ch = reader.readLine();
-			if(ch.equalsIgnoreCase("Y")) {
+			if (ch.equalsIgnoreCase("Y")) {
 				studentServices.delete(i);
-			}
-			else if(ch.equalsIgnoreCase("N")) {
+			} else if (ch.equalsIgnoreCase("N")) {
 				displayStudentOptions(managementMapper);
-			}
-			else {
+			} else {
 				System.out.println("Invalid Input, Considering This As NO");
 				displayStudentOptions(managementMapper);
 			}
-		} 
-		catch(Exception ex){
-			System.err.println("Invalid Input"+ex.getMessage());
+		} catch (Exception ex) {
+			System.err.println("Invalid Input" + ex.getMessage());
 			deleteStudent();
-		}
-		finally {
+		} finally {
 			displayStudentOptions(managementMapper);
 		}
-		
-		
+
 	}
 
 	private void updatedStudent() {
-		
-		
+
 		try {
 			System.out.println("Enter Student ID:- ");
 			int i = Integer.parseInt(reader.readLine());
@@ -197,47 +184,41 @@ public class StudentMapper {
 			studentinfo.setClassID(classroom);
 			studentServices.updateStudent(studentinfo, i);
 		} catch (Exception e) {
-			System.err.println("Invalid Input"+e.getMessage());
+			System.err.println("Invalid Input" + e.getMessage());
 			updatedStudent();
-		}
-		finally {
+		} finally {
 			displayStudentOptions(managementMapper);
 		}
-		
-		
+
 	}
 
 	private void insertStudent() {
 		try {
 			int id = studentServices.getNewStudentID();
-			System.out.println("New Student ID is "+ id +", Student ID is important, remember it & do not share it with anyone ");
+			System.out.println("New Student ID is " + id
+					+ ", Student ID is important, remember it & do not share it with anyone ");
 			studentinfo.setStID(id);
-			
+
 			System.out.println("Enter Student Roll No");
 			int Roll = Integer.parseInt(reader.readLine());
 			studentinfo.setRollNo(Roll);
-			
+
 			System.out.println("Enter Student Name");
 			String Name = reader.readLine();
 			studentinfo.setStName(Name);
-			
+
 			System.out.println("Choose Classroom, Enter ClassID not the Classroom");
 			classroomMapper.displayAllClassrooms();
 			int classroom = Integer.parseInt(reader.readLine());
 			studentinfo.setClassID(classroom);
 			studentServices.insertStudent(studentinfo);
-		}catch (Exception e) {
-			System.err.println("Invalid Input"+e.getMessage());
+		} catch (Exception e) {
+			System.err.println("Invalid Input" + e.getMessage());
 			insertStudent();
-		}
-		finally {
+		} finally {
 			displayStudentOptions(managementMapper);
 		}
-		
-		
-		
-		
-		
+
 	}
 
 }

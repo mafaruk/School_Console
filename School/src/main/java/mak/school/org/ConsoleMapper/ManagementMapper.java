@@ -18,7 +18,7 @@ public class ManagementMapper {
 
 	@Autowired
 	SubjectMapper subjectMapper;
-	
+
 	@Autowired
 	ManagmentServices managmentServices;
 
@@ -26,7 +26,7 @@ public class ManagementMapper {
 
 	@Autowired
 	ClassroomMapper classroomMapper;
-	
+
 	@Autowired
 	StaffMapper staffMapper;
 
@@ -46,7 +46,7 @@ public class ManagementMapper {
 
 	public int getSessionID() {
 		return sessionID;
-		
+
 	}
 
 	public void setSessionID(int sessionID) {
@@ -57,15 +57,14 @@ public class ManagementMapper {
 		mangement = managmentServices.getMangement(i);
 		int tid = 0;
 		boolean isTeaching = false;
-		if((mangement.gettID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
+		if ((mangement.gettID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
 			tid = mangement.getnTID();
 			isTeaching = false;
-		}
-		else if((mangement.getnTID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))){
+		} else if ((mangement.getnTID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
 			tid = mangement.gettID();
 			isTeaching = true;
 		}
-		
+
 		System.out.print("Name :-");
 		staffMapper.dispalyTeacherName(tid, isTeaching);
 		System.out.println("Designation :- " + mangement.getDesignation());
@@ -86,7 +85,7 @@ public class ManagementMapper {
 				studentMapper.displayStudentOptions(this);
 				break;
 			case "2":
-				staffMapper.displayStaffOption(this,true);
+				staffMapper.displayStaffOption(this, true);
 				break;
 			case "3":
 				staffMapper.displayStaffOption(this, false);
@@ -115,7 +114,7 @@ public class ManagementMapper {
 			ch = reader.readLine();
 			switch (ch) {
 			case "1":
-				staffMapper.displayStaffOption(this,true);
+				staffMapper.displayStaffOption(this, true);
 				break;
 			case "2":
 				classroomMapper.displayClassroomOptions(this);
@@ -140,10 +139,10 @@ public class ManagementMapper {
 			ch = reader.readLine();
 			switch (ch) {
 			case "1":
-				staffMapper.displayStaffOption(this,true);
+				staffMapper.displayStaffOption(this, true);
 				break;
 			case "2":
-				staffMapper.displayStaffOption(this,false);
+				staffMapper.displayStaffOption(this, false);
 				break;
 			case "3":
 				displayManagementOptions(this);
@@ -162,16 +161,12 @@ public class ManagementMapper {
 	}
 
 	private void displayManagementOptions(ManagementMapper managementMapper) {
-		
-			System.out.println(
-					"\n1.Add New Management's Information \n2.Update Management's  Information \n3.Delete Management's  Information \n4.Search Management's  Information \n5.Show All Managements' Information \nPress N to go back to Managerial Console ");
-			String sch = null;
-			try {
-				sch = reader.readLine();
-			} catch (Exception e) {
-				System.err.println("Invalid input");
-				displayManagementOptions(managementMapper);
-			}
+
+		System.out.println(
+				"\n1.Add New Management's Information \n2.Update Management's  Information \n3.Delete Management's  Information \n4.Search Management's  Information \n5.Show All Managements' Information \nPress N to go back to Managerial Console ");
+		String sch = null;
+		try {
+			sch = reader.readLine();
 
 			switch (sch) {
 			case "1":
@@ -201,8 +196,11 @@ public class ManagementMapper {
 				displayManagementOptions(managementMapper);
 				break;
 			}
-
+		} catch (Exception e) {
+			System.err.println("Invalid input");
+			displayManagementOptions(managementMapper);
 		}
+	}
 
 	private void insertManagement() {
 		try {
@@ -246,7 +244,7 @@ public class ManagementMapper {
 		} finally {
 			displayManagementOptions(this);
 		}
-		
+
 	}
 
 	private void updatedManagement() {
@@ -277,18 +275,17 @@ public class ManagementMapper {
 				throw new IOException();
 
 			}
-			
+
 			System.out.println("\nNote:-You Cannot change the Designation");
-			managmentServices.updateMangment(mangement,id, isTeaching);
-			
-		} catch (NumberFormatException | IOException e) {  
+			managmentServices.updateMangment(mangement, id, isTeaching);
+
+		} catch (NumberFormatException | IOException e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			updatedManagement();
-		}
-		finally {
+		} finally {
 			displayManagementOptions(this);
 		}
-		
+
 	}
 
 	private void deleteManagement() {
@@ -298,58 +295,53 @@ public class ManagementMapper {
 			displayManagement(id);
 			System.out.println("Are You sure? you want to delete Management Info. Y/N");
 			String ch = reader.readLine();
-			if(ch.equalsIgnoreCase("Y")) {
+			if (ch.equalsIgnoreCase("Y")) {
 				managmentServices.delete(id);
-			}
-			else if(ch.equalsIgnoreCase("N")) {
+			} else if (ch.equalsIgnoreCase("N")) {
 				displayManagementOptions(this);
-			}
-			else {
+			} else {
 				System.out.println("Invalid Input, Considering This As NO");
 				displayManagementOptions(this);
 			}
-			
-		} catch ( Exception e) {  
+
+		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			deleteManagement();
-		}
-		finally {
+		} finally {
 			displayManagementOptions(this);
 		}
-		
+
 	}
 
 	private void searchManagement() {
 		System.out.println("Enter Management ID:- ");
 		int id = 0;
 		try {
-			
+
 			id = Integer.parseInt(reader.readLine());
 			displayManagement(id);
 		} catch (Exception e) {
 			System.err.println("Invalid Input" + e.getMessage());
 			searchManagement();
-		}
-		finally {
+		} finally {
 			displayManagementOptions(this);
 		}
-		
+
 	}
-	
-	public void displayAllManagement(){
+
+	public void displayAllManagement() {
 		List<Mangement> managementList = managmentServices.getAllManagement();
 		for (Mangement mangement : managementList) {
 			int tid = 0;
 			boolean isTeaching = false;
-			if((mangement.gettID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
+			if ((mangement.gettID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
 				tid = mangement.getnTID();
 				isTeaching = false;
-			}
-			else if((mangement.getnTID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))){
+			} else if ((mangement.getnTID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
 				tid = mangement.gettID();
 				isTeaching = true;
 			}
-			
+
 			System.out.print("Name :-");
 			staffMapper.dispalyTeacherName(tid, isTeaching);
 			System.out.println("Designation :- " + mangement.getDesignation());
@@ -357,40 +349,36 @@ public class ManagementMapper {
 	}
 
 	private void showAllManagement() {
-		try{
+		try {
 			displayAllManagement();
-		}
-		finally {
+		} finally {
 			displayManagementOptions(this);
 		}
-		
+
 	}
 
 	public void displayManagementWithConsole(int i) {
 		try {
-		mangement = managmentServices.getMangement(i);
-		int tid = 0;
-		boolean isTeaching = false;
-		if((mangement.gettID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
-			tid = mangement.getnTID();
-			isTeaching = false;
-		}
-		else if((mangement.getnTID()==0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))){
-			tid = mangement.gettID();
-			isTeaching = true;
-		}
-		
-		System.out.print("Name :-");
-		staffMapper.dispalyTeacherName(tid, isTeaching);
-		System.out.println("Designation :- " + mangement.getDesignation());
-		
+			mangement = managmentServices.getMangement(i);
+			int tid = 0;
+			boolean isTeaching = false;
+			if ((mangement.gettID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
+				tid = mangement.getnTID();
+				isTeaching = false;
+			} else if ((mangement.getnTID() == 0) && !(mangement.getDesignation().equalsIgnoreCase("Not assigned"))) {
+				tid = mangement.gettID();
+				isTeaching = true;
+			}
+
+			System.out.print("Name :-");
+			staffMapper.dispalyTeacherName(tid, isTeaching);
+			System.out.println("Designation :- " + mangement.getDesignation());
+
 			displayManagerialOperationConsoles();
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Invalid Input" + e.getMessage());
 		}
-		
+
 	}
-		
-	
 
 }
